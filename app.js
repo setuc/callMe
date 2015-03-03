@@ -29,6 +29,41 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
+//Twilio Code
+// Handle the form POST to place a call
+app.post('/call', function(request, response) {
+    var client = twilio();
+    client.makeCall({
+        // make a call to this number
+        to:request.body.number,
+
+        // Change to a Twilio number you bought - see:
+        // https://www.twilio.com/user/account/phone-numbers/incoming
+        from:'+15558675309',
+
+        // A URL in our app which generates TwiML
+        // Change "CHANGE_ME" to your app's name
+        url:'https://CHANGE_ME.azurewebsites.net/outbound_call'
+    }, function(error, data) {
+        // Go back to the home page
+        response.redirect('/');
+    });
+});
+
+// Generate TwiML to handle an outbound call
+app.post('/outbound_call', function(request, response) {
+    var twiml = new twilio.TwimlResponse();
+
+    // Say a message to the call's receiver
+    twiml.say('hello - thanks for checking out Twilio and Azure', {
+        voice:'woman'
+    });
+
+    response.set('Content-Type', 'text/xml');
+    response.send(twiml.toString());
+});
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
