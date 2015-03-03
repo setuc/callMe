@@ -3,10 +3,9 @@ extends layout
 block content
   h1= title
   p Bhelcome to #{title}
-div
     form(action='/call',method='post')
         | Enter a number to call
         div
                 input(type='text',name='number')
                 input(type='submit', value='Call Me')
-                
+
