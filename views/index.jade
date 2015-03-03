@@ -5,21 +5,8 @@ block content
   p Bhelcome to #{title}
 div
     form(action='/call',method='post')
-        div(data-role='fieldcontain')
-            fieldset(data-role='controlgroup')
-                label(for='email') email
-                    input(id='email',type='text',value='',placeholder='@',name='email')
-        div#passworddiv(data-role='fieldcontain')
-            fieldset(data-role='controlgroup')
-                label(for='password') password
-                    input(id='password',type='password',value='',placeholder='',name='password')
-        div(id='hiddendiv',data-role='fieldcontain')
-            fieldset(data-role='controlgroup')
-                label(for='hidden_password') password
-                    input(id='hidden_password',type='text',value='',placeholder='',name='password2')
-        div(data-role='fieldcontain')
-            fieldset(data-type='vertical', data-role='controlgroup')
-                label(for='showpass') show password
-                input(id='showpass',type='checkbox')
-        div(data-role='fieldcontain')
-            input(type='submit',value='Sign Up',data-transition='fade', data-theme='c')
+        | Enter a number to call
+        div
+                input(type='text',name='number')
+                input(type='submit', value='Call Me')
+                
